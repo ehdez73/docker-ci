@@ -36,6 +36,7 @@ $ docker rm ci
 # remove the image
 $ docker rmi medianet/ci
 
+```
 
 ## Usage
 
