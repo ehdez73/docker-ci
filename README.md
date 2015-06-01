@@ -37,18 +37,13 @@ $ docker rm ci
 $ docker rmi medianet/ci
 
 
-```
 ## Usage
 
 ![Jenkins](https://wiki.jenkins-ci.org/download/attachments/2916393/logo-title.png "Jenkins")
-```
     Browse to Jenkins : http://localhost:8888
-```
 
 ![SonarQube](http://www.medianetsoftware.com/wp-content/uploads/2014/06/SonarQube1-780x187.png)
-```
     Browse to Sonar : http://localhost:9000
-	   Sonar DB : jdbc:h2:tcp://localhost:9092/sonar 
-```
+    Sonar DB : jdbc:h2:tcp://localhost:9092/sonar 
 
 
