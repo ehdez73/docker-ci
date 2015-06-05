@@ -56,7 +56,7 @@ RUN npm install -g gulp grunt bower
 ADD http://sourceforge.net/projects/sonar-pkg/files/deb/binary/sonar_5.1_all.deb/download /tmp/sonar_5.1_all.deb
 RUN dpkg -i /tmp/sonar_5.1_all.deb; \
     rm /tmp/sonar_5.1_all.deb
-
+ADD http://downloads.sonarsource.com/plugins/org/codehaus/sonar-plugins/javascript/sonar-javascript-plugin/2.6/sonar-javascript-plugin-2.6.jar /opt/sonar/extensions/plugins/sonar-javascript-plugin-2.6.jar
 
 ADD run.sh /root/run.sh
 RUN chmod +x /root/run.sh
