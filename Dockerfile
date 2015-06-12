@@ -58,6 +58,10 @@ RUN dpkg -i /tmp/sonar_5.1_all.deb; \
     rm /tmp/sonar_5.1_all.deb
 ADD http://downloads.sonarsource.com/plugins/org/codehaus/sonar-plugins/javascript/sonar-javascript-plugin/2.6/sonar-javascript-plugin-2.6.jar /opt/sonar/extensions/plugins/sonar-javascript-plugin-2.6.jar
 
+# Workaround until version 3.4 has been released: http://jira.sonarsource.com/browse/SONARJAVA-990
+ADD sonar-java-plugin-3.4-SNAPSHOT.jar /opt/sonar/extensions/plugins/sonar-java-plugin-3.4-SNAPSHOT.jar
+
+
 ADD run.sh /root/run.sh
 RUN chmod +x /root/run.sh
 
