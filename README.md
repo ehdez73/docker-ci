@@ -2,7 +2,7 @@
 
 This image contains a Jenkins and a Sonar installation
 
-* Jenkins 1.61 with plugins:
+* Jenkins 1.628 with plugins:
    * git
    * git-client
    * scm-api
@@ -12,14 +12,17 @@ This image contains a Jenkins and a Sonar installation
    * conditional-buildstep
    * run-condition
    * token-macro
-   * gradle
-* Sonar 5.1
+   * copyartifact
+   * promoted-builds
+   
+* Sonar 5.1.1
    * sonar-javascript-plugin
+
 * Java 1.8
-* Maven 
-* Gradle
 * Node
 * Gulp
+* Grunt
+* Bower
 
 
 

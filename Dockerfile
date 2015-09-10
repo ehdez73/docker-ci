@@ -9,38 +9,17 @@ RUN apt-get install -y software-properties-common
 RUN add-apt-repository -y ppa:webupd8team/java
 RUN apt-get update
 
+############################################################ BUILD TOOLS ######################################################### 
 # GIT
 #####
 RUN apt-get install -y git
+RUN 
 
 # JAVA
 ############
 # Auto-accept the Oracle JDK license
 RUN echo oracle-java8-installer shared/accepted-oracle-license-v1-1 select true | sudo /usr/bin/debconf-set-selections; \
     apt-get install -y oracle-java8-installer
-
-# Jenkins
-#########
-ADD http://mirrors.jenkins-ci.org/war/1.613/jenkins.war /opt/jenkins.war
-RUN chmod 644 /opt/jenkins.war
-ENV JENKINS_HOME /jenkins
-
-# Jenkins plugins
-###################
-ADD https://updates.jenkins-ci.org/download/plugins/git/2.3.5/git.hpi $JENKINS_HOME/plugins/git.hpi
-ADD http://updates.jenkins-ci.org/download/plugins/git-client/1.17.1/git-client.hpi $JENKINS_HOME/plugins/git-client.hpi
-ADD https://updates.jenkins-ci.org/download/plugins/scm-api/0.2/scm-api.hpi $JENKINS_HOME/plugins/scm-api.hpi
-ADD https://updates.jenkins-ci.org/download/plugins/build-pipeline-plugin/1.4.3/build-pipeline-plugin.hpi $JENKINS_HOME/plugins/build-pipeline-plugin.hpi
-ADD https://updates.jenkins-ci.org/download/plugins/parameterized-trigger/2.26/parameterized-trigger.hpi $JENKINS_HOME/plugins/parameterized-trigger.hpi
-ADD https://updates.jenkins-ci.org/download/plugins/jquery/1.7.2-1/jquery.hpi $JENKINS_HOME/plugins/jquery.hpi
-ADD https://updates.jenkins-ci.org/download/plugins/conditional-buildstep/1.3.3/conditional-buildstep.hpi $JENKINS_HOME/plugins/conditional-buildstep.hpi
-ADD https://updates.jenkins-ci.org/download/plugins/run-condition/1.0/run-condition.hpi $JENKINS_HOME/plugins/run-condition.hpi 
-ADD https://updates.jenkins-ci.org/download/plugins/token-macro/1.5.1/token-macro.hpi $JENKINS_HOME/plugins/token-macro.hpi 
-ADD https://updates.jenkins-ci.org/download/plugins/gradle/1.24/gradle.hpi $JENKINS_HOME/plugins/gradle.hpi
-
-# Maven Settings
-################
-ADD maven-settings.xml /root/maven-settings.xml
 
 # Node & npm
 #########################
@@ -51,17 +30,50 @@ RUN apt-get install -q -y nodejs npm; \
 #########################
 RUN npm install -g gulp grunt bower
 
-# SONAR
-########
-ADD http://sourceforge.net/projects/sonar-pkg/files/deb/binary/sonar_5.1_all.deb/download /tmp/sonar_5.1_all.deb
-RUN dpkg -i /tmp/sonar_5.1_all.deb; \
-    rm /tmp/sonar_5.1_all.deb
-ADD http://downloads.sonarsource.com/plugins/org/codehaus/sonar-plugins/javascript/sonar-javascript-plugin/2.6/sonar-javascript-plugin-2.6.jar /opt/sonar/extensions/plugins/sonar-javascript-plugin-2.6.jar
-
-# Workaround until version 3.4 has been released: http://jira.sonarsource.com/browse/SONARJAVA-990
-ADD sonar-java-plugin-3.4-SNAPSHOT.jar /opt/sonar/extensions/plugins/sonar-java-plugin-3.4-SNAPSHOT.jar
+# Maven Settings
+################
+ADD maven-settings.xml /root/maven-settings.xml
 
 
+############################################################ JENKINS  ############################################################ 
+ENV JENKINS_VERSION 1.628
+##########################
+ADD http://mirrors.jenkins-ci.org/war/$JENKINS_VERSION/jenkins.war /opt/jenkins.war
+RUN chmod 644 /opt/jenkins.war
+
+# Plugins
+##########
+ENV JENKINS_HOME /jenkins
+ENV JENKINS_PLUGINS_LOCAL $JENKINS_HOME/plugins
+ENV JENKINS_PLUGINS_REMOTE https://updates.jenkins-ci.org/download/plugins
+
+ADD $JENKINS_PLUGINS_REMOTE/build-pipeline-plugin/1.4.7/build-pipeline-plugin.hpi   $JENKINS_PLUGINS_LOCAL/build-pipeline-plugin.hpi
+ADD $JENKINS_PLUGINS_REMOTE/git/2.4.0/git.hpi                                       $JENKINS_PLUGINS_LOCAL/git.hpi
+ADD $JENKINS_PLUGINS_REMOTE/git-client/1.19.0/git-client.hpi                        $JENKINS_PLUGINS_LOCAL/git-client.hpi
+ADD $JENKINS_PLUGINS_REMOTE/jquery/1.11.2-0/jquery.hpi                              $JENKINS_PLUGINS_LOCAL/jquery.hpi
+ADD $JENKINS_PLUGINS_REMOTE/parameterized-trigger/2.28/parameterized-trigger.hpi    $JENKINS_PLUGINS_LOCAL/parameterized-trigger.hpi
+ADD $JENKINS_PLUGINS_REMOTE/token-macro/1.10/token-macro.hpi                        $JENKINS_PLUGINS_LOCAL/token-macro.hpi 
+ADD $JENKINS_PLUGINS_REMOTE/scm-api/0.2/scm-api.hpi                                 $JENKINS_PLUGINS_LOCAL/scm-api.hpi
+ADD $JENKINS_PLUGINS_REMOTE/conditional-buildstep/1.3.3/conditional-buildstep.hpi   $JENKINS_PLUGINS_LOCAL/conditional-buildstep.hpi
+ADD $JENKINS_PLUGINS_REMOTE/run-condition/1.0/run-condition.hpi                     $JENKINS_PLUGINS_LOCAL/run-condition.hpi 
+ADD $JENKINS_PLUGINS_REMOTE/copyartifact/1.36/copyartifact.hpi                      $JENKINS_PLUGINS_LOCAL/copyartifact.hpi
+ADD $JENKINS_PLUGINS_REMOTE/promoted-builds/2.22/promoted-builds.hpi                $JENKINS_PLUGINS_LOCAL/promoted-builds.hpi
+
+############################################################ SONAR  ############################################################ 
+ENV SONAR_VERSION 5.1.2_all
+###########################
+ADD http://sourceforge.net/projects/sonar-pkg/files/deb/binary/sonar_$SONAR_VERSION.deb/download /tmp/sonar.deb
+RUN dpkg -i /tmp/sonar.deb; \
+    rm /tmp/sonar.deb
+
+# Plugins
+##########
+ENV SONAR_PLUGINS_REMOTE http://downloads.sonarsource.com/plugins/org/codehaus/sonar-plugins
+ENV SONAR_PLUGINS_LOCAL /opt/sonar/extensions/plugins
+
+ADD $SONAR_PLUGINS_REMOTE/javascript/sonar-javascript-plugin/2.6/sonar-javascript-plugin-2.6.jar $SONAR_PLUGINS_LOCAL/sonar-javascript-plugin-2.6.jar
+
+############################################################ ENTRY POINT  ############################################################ 
 ADD run.sh /root/run.sh
 RUN chmod +x /root/run.sh
 
