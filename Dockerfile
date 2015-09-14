@@ -13,7 +13,6 @@ RUN apt-get update
 # GIT
 #####
 RUN apt-get install -y git
-RUN 
 
 # JAVA
 ############
