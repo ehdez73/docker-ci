@@ -17,6 +17,7 @@ This image contains a Jenkins and a Sonar installation
    
 * Sonar 5.1.1
    * sonar-javascript-plugin
+   * sonar-build-breaker-plugin
 
 * Java 1.8
 * Node
