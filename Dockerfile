@@ -33,6 +33,9 @@ RUN npm install -g gulp grunt bower
 ################
 ADD maven-settings.xml /root/maven-settings.xml
 
+# Gradle Settings
+#################
+ADD gradle.properties /root/gradle.properties
 
 ############################################################ JENKINS  ############################################################ 
 ENV JENKINS_VERSION 1.628
@@ -71,6 +74,7 @@ ENV SONAR_PLUGINS_REMOTE http://downloads.sonarsource.com/plugins/org/codehaus/s
 ENV SONAR_PLUGINS_LOCAL /opt/sonar/extensions/plugins
 
 ADD $SONAR_PLUGINS_REMOTE/javascript/sonar-javascript-plugin/2.6/sonar-javascript-plugin-2.6.jar $SONAR_PLUGINS_LOCAL/sonar-javascript-plugin-2.6.jar
+ADD $SONAR_PLUGINS_REMOTE/sonar-build-breaker-plugin/1.1/sonar-build-breaker-plugin-1.1.jar $SONAR_PLUGINS_LOCAL/sonar-build-breaker-plugin-1.1.jar
 
 ############################################################ ENTRY POINT  ############################################################ 
 ADD run.sh /root/run.sh
