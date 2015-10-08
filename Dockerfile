@@ -60,6 +60,7 @@ ADD $JENKINS_PLUGINS_REMOTE/conditional-buildstep/1.3.3/conditional-buildstep.hp
 ADD $JENKINS_PLUGINS_REMOTE/run-condition/1.0/run-condition.hpi                     $JENKINS_PLUGINS_LOCAL/run-condition.hpi 
 ADD $JENKINS_PLUGINS_REMOTE/copyartifact/1.36/copyartifact.hpi                      $JENKINS_PLUGINS_LOCAL/copyartifact.hpi
 ADD $JENKINS_PLUGINS_REMOTE/promoted-builds/2.22/promoted-builds.hpi                $JENKINS_PLUGINS_LOCAL/promoted-builds.hpi
+ADD $JENKINS_PLUGINS_REMOTE/sonar/2.2.1/sonar.hpi                                   $JENKINS_PLUGINS_LOCAL/sonar.hpi
 
 ############################################################ SONAR  ############################################################ 
 ENV SONAR_VERSION 5.1.2_all
