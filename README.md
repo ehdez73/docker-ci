@@ -2,7 +2,7 @@
 
 This image contains a Jenkins and a Sonar installation
 
-* Jenkins 1.628 with plugins:
+* Jenkins 1.632 with plugins:
    * git
    * git-client
    * scm-api
@@ -14,8 +14,9 @@ This image contains a Jenkins and a Sonar installation
    * token-macro
    * copyartifact
    * promoted-builds
+   * sonar
    
-* Sonar 5.1.1
+* Sonar 5.1.2
    * sonar-javascript-plugin
    * sonar-build-breaker-plugin
 
@@ -24,6 +25,7 @@ This image contains a Jenkins and a Sonar installation
 * Gulp
 * Grunt
 * Bower
+* PhantomJS 
 
 
 

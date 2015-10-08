@@ -37,8 +37,18 @@ ADD maven-settings.xml /root/maven-settings.xml
 #################
 ADD gradle.properties /root/gradle.properties
 
+
+# PhantomJS 2.0 (headless)
+###########################
+ADD https://github.com/Pyppe/phantomjs2.0-ubuntu14.04x64/raw/master/bin/phantomjs /usr/local/bin/phantomjs
+RUN chmod +x /usr/local/bin/phantomjs
+#RUN apt-get install -q -y build-essential g++ flex bison gperf ruby perl libsqlite3-dev libfontconfig1-dev libicu-dev libfreetype6 libssl-dev libpng-dev libjpeg-dev
+
+RUN apt-get install -q -y libicu52 libfontconfig libfontconfig1 libjpeg8 libpng12-0
+
+
 ############################################################ JENKINS  ############################################################ 
-ENV JENKINS_VERSION 1.628
+ENV JENKINS_VERSION 1.632
 ##########################
 ADD http://mirrors.jenkins-ci.org/war/$JENKINS_VERSION/jenkins.war /opt/jenkins.war
 RUN chmod 644 /opt/jenkins.war
