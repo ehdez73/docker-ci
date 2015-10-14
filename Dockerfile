@@ -68,9 +68,10 @@ ADD $JENKINS_PLUGINS_REMOTE/token-macro/1.10/token-macro.hpi                    
 ADD $JENKINS_PLUGINS_REMOTE/scm-api/0.2/scm-api.hpi                                 $JENKINS_PLUGINS_LOCAL/scm-api.hpi
 ADD $JENKINS_PLUGINS_REMOTE/conditional-buildstep/1.3.3/conditional-buildstep.hpi   $JENKINS_PLUGINS_LOCAL/conditional-buildstep.hpi
 ADD $JENKINS_PLUGINS_REMOTE/run-condition/1.0/run-condition.hpi                     $JENKINS_PLUGINS_LOCAL/run-condition.hpi 
-ADD $JENKINS_PLUGINS_REMOTE/copyartifact/1.36.1/copyartifact.hpi                      $JENKINS_PLUGINS_LOCAL/copyartifact.hpi
+ADD $JENKINS_PLUGINS_REMOTE/copyartifact/1.36.1/copyartifact.hpi                    $JENKINS_PLUGINS_LOCAL/copyartifact.hpi
 ADD $JENKINS_PLUGINS_REMOTE/promoted-builds/2.22/promoted-builds.hpi                $JENKINS_PLUGINS_LOCAL/promoted-builds.hpi
 ADD $JENKINS_PLUGINS_REMOTE/sonar/2.2.1/sonar.hpi                                   $JENKINS_PLUGINS_LOCAL/sonar.hpi
+ADD $JENKINS_PLUGINS_REMOTE/ansicolor/0.4.1/ansicolor.hpi                           $JENKINS_PLUGINS_LOCAL/ansicolor.hpi
 
 ############################################################ SONAR  ############################################################ 
 ENV SONAR_VERSION 5.1.2_all
