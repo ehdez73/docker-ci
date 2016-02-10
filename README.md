@@ -2,7 +2,7 @@
 
 This image contains a Jenkins and a Sonar installation
 
-* Jenkins 1.632 with plugins:
+* Jenkins 1.647 with plugins:
    * git
    * git-client
    * scm-api
@@ -14,18 +14,20 @@ This image contains a Jenkins and a Sonar installation
    * token-macro
    * copyartifact
    * promoted-builds
-   * sonar
-   
-* Sonar 5.1.2
-   * sonar-javascript-plugin
-   * sonar-build-breaker-plugin
+   * groovy-postbuild
+
+
+* Sonar 5.3_all
+   * sonar-javascript-plugin-2.10
+   * sonar-groovy-plugin-1.3.1
+   * sonar-scalastyle-plugin-0.0.1-SNAPSHOT
 
 * Java 1.8
 * Node
 * Gulp
 * Grunt
 * Bower
-* PhantomJS 
+* PhantomJS
 
 
 
@@ -33,8 +35,8 @@ This image contains a Jenkins and a Sonar installation
 
     # Build the image
     $ docker build --tag="ehdez73/docker-ci" .
-    
-    # Run a container 
+
+    # Run a container
     $ docker docker run -d \
           -p 8888:8080 \
           -p 9000:9000 \
@@ -44,16 +46,16 @@ This image contains a Jenkins and a Sonar installation
 
     # Attach to the container
     $ docker exec -i -t ci /bin/bash
-    
+
     # Stop the container
     $ docker stop ci
-    
+
     # Re-start the container
     $ docker start ci
-    
+
     # remove the container
     $ docker rm ci
-    
+
     # remove the image
     $ docker rmi ehdez73/docker-ci
 
@@ -61,6 +63,4 @@ This image contains a Jenkins and a Sonar installation
 ## Usage
 * Browse to Jenkins : [http://localhost:8888](http://localhost:8888)
 * Browse to Sonar : [http://localhost:9000](http://localhost:9000)
-* Sonar DB : jdbc:h2:tcp://localhost:9092/sonar 
-
-
+* Sonar DB : jdbc:h2:tcp://localhost:9092/sonar
